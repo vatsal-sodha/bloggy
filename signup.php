@@ -70,10 +70,10 @@ if(isset($_POST['submit'])){
     
   }
   if($signup === "Soory something went wrong"){
-    echo '<div class="alert alert-danger"><center>Invalid Constraints</center></div>';
+    echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Soory something went wrong</center></div>';
   }
   if($signup === "Username already exists"){
-    echo '<div class="alert alert-danger"><center>Username is already registered!!</center></div>';
+    echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Username is already registered!!</center></div>';
   }
 }
 ?>

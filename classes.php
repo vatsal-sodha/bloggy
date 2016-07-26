@@ -3,6 +3,8 @@
 class Blogger
 {
 
+// private $connnect; private $servername ,
+
 	function __construct($conn){
 		$this->conn=$conn;
 	}
@@ -52,6 +54,20 @@ class Blogger
 	}
 		
 }
+}
+class Admin{
+	function __construct($conn){
+		$this->conn=$conn;
+	}
+	public function is_login($username,$password){
+			if($username === "admin" && $password === "vatsal")
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+	}
 }
 
 ?>

@@ -3,7 +3,7 @@ session_start();
 include_once 'classes.php';
 include_once 'connection.php';
 
-if(isset($_SESSION['username']))
+if(isset($_SESSION['admin']))
 {
   header('Location:userhome.php');
 }
@@ -25,8 +25,8 @@ if(isset($_SESSION['username']))
   <h2>Login</h2>
   <form role="form" method="post">
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
@@ -42,24 +42,23 @@ if(isset($_SESSION['username']))
 if(isset($_POST['submit'])){
 
 
-  echo "<script type=javascript> console.log('Connection established');</script>";
-  $email=$_POST['email'];
+  $email=$_POST['username'];
   $password=$_POST['password'];
     
   
-  $blogger = new Blogger($conn);
+  $admin = new Admin($conn);
   
-  $login = $blogger->is_login($email,$password);
+  $login = $admin->is_login($email,$password);
   
 
   if($login === true)
   {
-    $_SESSION['username']=$email;
+    $_SESSION['admin']=$username;
     header('Location:userhome.php');
     
   }
   if($login === false){
-   echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
+   echo '<div class="alert alert-danger pagination-centered" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
   }
 }
 
