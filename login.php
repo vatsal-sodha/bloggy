@@ -26,11 +26,11 @@ if(isset($_SESSION['username']))
   <form role="form" method="post">
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password">
+      <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password" required>
     </div>
     
     <button type="submit" name="submit" class="btn btn-default">Submit</button>
@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
     
   }
   if($login === false){
-    echo "<p class='danger'>Invalid Constraints</p>"; 
+   echo '<div class="alert alert-danger"><center>Invalid Constraints</center></div>';
   }
 }
 

@@ -24,11 +24,7 @@ include_once 'connection.php';
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Name
-        <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="userhome.php?logout">Logout</a></li> 
+      <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
         </ul>
       </li>
     </ul>
