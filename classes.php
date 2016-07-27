@@ -113,6 +113,13 @@ class Admin{
 				return "Something went wrong";
 			}	
 	}
+	public function admin_logout()
+	{
+	 	unset($_SESSION['admin']);
+	 	session_destroy();
+	 	header('Location:index.html');
+	 	
+	 }
 }
 
 ?>

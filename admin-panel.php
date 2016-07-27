@@ -18,6 +18,22 @@ include_once 'connection.php';
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bloggy</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class=""><a href="index.html">Home</a></li>
+      
+    </ul>
+  <ul class="nav navbar-nav navbar-right">
+      <li><a href="admin-panel.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
 <?php
 $admin = new Admin($conn);
   
@@ -75,4 +91,11 @@ $admin = new Admin($conn);
  		 echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Soory something went wrong</center></div>';
  	}
  }
+
+if(isset($_GET['logout']))
+{
+  
+  $logout =$admin->admin_logout();
+  
+}
 ?>
