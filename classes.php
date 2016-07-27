@@ -68,6 +68,51 @@ class Admin{
 				return false;
 			}
 	}
+	public function get_bloggers(){
+		$query1="SELECT blogger_firstname,blogger_username,blogger_is_active from blogger_info";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+			// $bloggers = $this->conn->fetch_all($result,MYSQL_ASSOC);
+			// return $bloggers;
+			$i=0;
+			$bloggers = array();
+			while ($row = $result->fetch_array(MYSQLI_NUM)) {
+				$j=0;
+				// 3 for 3 fields username,firstname,is_active 
+				while ($j < 3){ 
+				$bloggers[$i][$j]=$row[$j];
+				$j=$j+1;
+				}
+				$i=$i+1;
+			}
+			return $bloggers;
+
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+	public function permission($username,$active){
+		$query1 = "SELECT blogger_is_active from blogger_info where blogger_username='$username'";
+		$result = $this->conn->query($query1);
+		if($result){
+			$query2= "UPDATE blogger_info SET blogger_is_active='$active' where blogger_username='$username'";
+			if($result2=$this->conn->query($query2))
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+
+		}
+		else{
+				return "Something went wrong";
+			}	
+	}
 }
 
 ?>

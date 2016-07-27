@@ -1,13 +1,11 @@
 <?php
 session_start();
-include_once 'classes.php';
-include_once 'connection.php';
-
 if(isset($_SESSION['admin']))
 {
   header('Location:userhome.php');
 }
-
+include_once 'classes.php';
+include_once 'connection.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +20,7 @@ if(isset($_SESSION['admin']))
 <body>
 
 <div class="container" style="width:50%">
-  <h2>Login</h2>
+  <h2>Welcome Admin</h2>
   <form role="form" method="post">
     <div class="form-group">
       <label for="username">Username:</label>
@@ -54,7 +52,7 @@ if(isset($_POST['submit'])){
   if($login === true)
   {
     $_SESSION['admin']=$username;
-    header('Location:userhome.php');
+    header('Location:admin-panel.php');
     
   }
   if($login === false){
