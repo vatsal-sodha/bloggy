@@ -51,9 +51,20 @@ class Blogger
 	}
 	else{
 		return "Username already exists";
+		}
 	}
-		
-}
+	public function is_perrmitted($username){
+		$query1="SELECT blogger_is_active from blogger_info where blogger_username='$username'";
+		$result1=$this->conn->query($query1);
+		if($result1)
+		{
+			$row=$result1->fetch_assoc();
+			return $row["blogger_is_active"];
+		}
+		else{
+			return "Not Permitted";
+		}
+	}
 }
 class Admin{
 	function __construct($conn){

@@ -2,6 +2,8 @@
 session_start();
 include_once 'classes.php';
 include_once 'connection.php';
+$username=$_SESSION['username'];
+$link ='write-blog.php?username='.$_SESSION['username'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +26,7 @@ include_once 'connection.php';
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
+      <li><a href="<?php echo 'write-blog.php?username='.$username.'';?>" class="glyphicon glyphicon-pencil">Write</a</li>
       <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
         </ul>
       </li>
@@ -38,8 +41,6 @@ if(isset($_GET['logout']))
   echo "Logout";
   $blogger = new Blogger($conn);
   $blogger->blogger_logout();
-
-
 }
 ?>
 </body>
