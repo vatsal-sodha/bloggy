@@ -3,6 +3,7 @@ session_start();
 include_once 'classes.php';
 include_once 'connection.php';
 $username=$_SESSION['username'];
+$blogger = new Blogger($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,10 +38,29 @@ $username=$_SESSION['username'];
 if(isset($_GET['logout']))
 {
   
-  echo "Logout";
-  $blogger = new Blogger($conn);
   $blogger->blogger_logout();
 }
+
+
+$blogs = $blogger->get_blog($username);
+if($blogs == false)
+  {
+    echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
+  }
+  else{
+    $i=0;
+    while($i < count($blogs)) {
+    
+    echo '<div class="container">
+    <div class="page-header">
+    <h1>'.$blogs[$i][1].'<br/><small>'.$blogs[$i][3].','.$blogs[$i][4].'</small></h1>
+    </div>
+    <h4>'.$blogs[$i][2].'</h4>
+    </div>';
+    $i=$i+1;  
+    }
+    
+  }
 ?>
 </body>
 </html>

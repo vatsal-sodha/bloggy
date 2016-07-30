@@ -65,7 +65,7 @@ class Blogger
 			return false;
 		}
 	}
-	public function publish($username,$title,$category,$desc)
+	public function get_blogger_id($username)
 	{
 		$query1="SELECT blogger_id from blogger_info where blogger_username='$username'";
 		$result1=$this->conn->query($query1);
@@ -73,10 +73,20 @@ class Blogger
 		{
 			$row1 = $result1->fetch_assoc();
 			$id = (int)$row1["blogger_id"];
+			return $id;
 		}
 		else{
+			return false;
+		}
+	}
+	public function publish($username,$title,$category,$desc)
+	{
+		$id = $this->get_blogger_id($username);
+		if ($id == false)
+		{
 			return "No blogger id found";
 		}
+
 		$date=date("Y-m-d");
 		$query2= "INSERT INTO blog_master(blogger_id,blog_title,blog_desc,blog_category,blog_author,blog_is_active,creation_Date) VALUES($id,'$title','$desc','$category','$username',1,'$date')";
 		if($this->conn->query($query2))
@@ -86,6 +96,35 @@ class Blogger
 		else{
 			return false;
 		}
+	}
+	public function get_blog($username)
+	{
+		$id = $this->get_blogger_id($username);
+		if ($id == false)
+		{
+			return "No blogger id found";
+		}
+		$query1 = "SELECT blogger_id,blog_title,blog_desc,blog_category,creation_date from blog_master where blogger_id='$id'";
+		$result= $this->conn->query($query1);
+		if($result){
+			$i=0;
+			$blogs = array();
+			while ($row = $result->fetch_array(MYSQLI_NUM)) {
+				$j=0;
+				// 5 for 5 fields id,title,desc,category,date, 
+				while ($j < 5){ 
+				$blogs[$i][$j]=$row[$j];
+				$j=$j+1;
+				}
+				$i=$i+1;
+			}
+			return $blogs;
+
+		}
+		else{
+			return false;
+		}
+
 	}
 }
 class Admin{
