@@ -39,7 +39,7 @@ class Blogger
 		$result2= $this->conn->query($query2);
 		if($result2->num_rows === 0)
 		{
-			$query1="INSERT INTO blogger_info(blogger_username,blogger_password,blogger_firstname,blogger_creation_date,blogger_is_active) VALUES('$email','$password','$firstname','$date',1)";
+			$query1="INSERT INTO blogger_info(blogger_username,blogger_password,blogger_firstname,blogger_creation_date,blogger_is_active) VALUES('$email','$password','$firstname','$date',0)";
 		if($this->conn->query($query1))
 		{
 			return true;
@@ -53,7 +53,7 @@ class Blogger
 		return "Username already exists";
 		}
 	}
-	public function is_perrmitted($username){
+	public function is_permitted($username){
 		$query1="SELECT blogger_is_active from blogger_info where blogger_username='$username'";
 		$result1=$this->conn->query($query1);
 		if($result1)
@@ -62,7 +62,29 @@ class Blogger
 			return $row["blogger_is_active"];
 		}
 		else{
-			return "Not Permitted";
+			return false;
+		}
+	}
+	public function publish($username,$title,$category,$desc)
+	{
+		$query1="SELECT blogger_id from blogger_info where blogger_username='$username'";
+		$result1=$this->conn->query($query1);
+		if($result1)
+		{
+			$row1 = $result1->fetch_assoc();
+			$id = (int)$row1["blogger_id"];
+		}
+		else{
+			return "No blogger id found";
+		}
+		$date=date("Y-m-d");
+		$query2= "INSERT INTO blog_master(blogger_id,blog_title,blog_desc,blog_category,blog_author,blog_is_active,creation_Date) VALUES($id,'$title','$desc','$category','$username',1,'$date')";
+		if($this->conn->query($query2))
+		{
+			return true;
+		}
+		else{
+			return false;
 		}
 	}
 }

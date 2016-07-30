@@ -28,7 +28,7 @@ include_once 'connection.php';
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
-  	<li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</li>
+  	
       <li><a href="admin-panel.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
         </ul>
       </li>

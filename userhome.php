@@ -3,7 +3,6 @@ session_start();
 include_once 'classes.php';
 include_once 'connection.php';
 $username=$_SESSION['username'];
-$link ='write-blog.php?username='.$_SESSION['username'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +25,7 @@ $link ='write-blog.php?username='.$_SESSION['username'];
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
-      <li><a href="<?php echo 'write-blog.php?username='.$username.'';?>" class="glyphicon glyphicon-pencil">Write</a</li>
+      <li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</a</li>
       <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
         </ul>
       </li>
