@@ -65,6 +65,8 @@ class Blogger
 			return false;
 		}
 	}
+
+
 	public function get_blogger_id($username)
 	{
 		$query1="SELECT blogger_id from blogger_info where blogger_username='$username'";
@@ -79,6 +81,8 @@ class Blogger
 			return false;
 		}
 	}
+
+
 	public function publish($username,$title,$category,$desc)
 	{
 		$id = $this->get_blogger_id($username);
@@ -97,6 +101,8 @@ class Blogger
 			return false;
 		}
 	}
+
+
 	public function get_blog($username)
 	{
 		$id = $this->get_blogger_id($username);
@@ -127,6 +133,9 @@ class Blogger
 
 	}
 }
+
+
+
 class Admin{
 	function __construct($conn){
 		$this->conn=$conn;
@@ -140,6 +149,8 @@ class Admin{
 				return false;
 			}
 	}
+
+
 	public function get_bloggers(){
 		$query1="SELECT blogger_firstname,blogger_username,blogger_is_active from blogger_info";
 		$result=$this->conn->query($query1);
@@ -167,6 +178,8 @@ class Admin{
 		}
 
 	}
+
+
 	public function permission($username,$active){
 		$query1 = "SELECT blogger_is_active from blogger_info where blogger_username='$username'";
 		$result = $this->conn->query($query1);
@@ -192,6 +205,45 @@ class Admin{
 	 	header('Location:index.html');
 	 	
 	 }
+}
+class Viewer{
+	function __construct($conn){
+		$this->conn=$conn;
+	}
+	public function get_all_blogs()
+	{
+		$query1 ="SELECT * from blog_master";
+		$result1= $this->conn->query($query1);
+
+		if($result1)
+		{
+			$i=0;
+			$blogs = array();
+			while ($row = $result->fetch_array(MYSQLI_NUM)) {
+				$j=0;
+				// 3 for 3 fields username,firstname,is_active 
+				while ($j < 9){ 
+				$blogs[$i][$j]=$row[$j];
+				if($j == 1)//for blogger id 
+				{
+					$query2="SELECT blogger_firstname,blogger_username from blogger_info where blogger_id ='$row[1]'";
+					$result2 = $this->conn->query($query2);
+					if($result2)
+					{
+						$row2=$result2->fetch_assoc();
+						$blogs[$i][9]=$row2['blogger_username'];
+						$blogs[$i][10]=$row2['blogger_firstname'];
+					}
+				}
+				$j=$j+1;
+				}
+
+				$i=$i+1;
+			}
+			return $blogs;
+		}
+	}
+
 }
 
 ?>

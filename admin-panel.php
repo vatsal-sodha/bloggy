@@ -30,7 +30,7 @@ include_once 'connection.php';
   <ul class="nav navbar-nav navbar-right">
   	
       <li><a href="admin-panel.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
-        </ul>
+        </ul> 
       </li>
     </ul>
   </div>
