@@ -212,17 +212,17 @@ class Viewer{
 	}
 	public function get_all_blogs()
 	{
-		$query1 ="SELECT * from blog_master";
+		$query1 ="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author,creation_date from blog_master";
 		$result1= $this->conn->query($query1);
 
 		if($result1)
 		{
 			$i=0;
 			$blogs = array();
-			while ($row = $result->fetch_array(MYSQLI_NUM)) {
+			while ($row = $result1->fetch_array(MYSQLI_NUM)) {
 				$j=0;
-				// 3 for 3 fields username,firstname,is_active 
-				while ($j < 9){ 
+				// 6 for 6 fields  
+				while ($j < 7){ 
 				$blogs[$i][$j]=$row[$j];
 				if($j == 1)//for blogger id 
 				{
@@ -231,8 +231,8 @@ class Viewer{
 					if($result2)
 					{
 						$row2=$result2->fetch_assoc();
-						$blogs[$i][9]=$row2['blogger_username'];
-						$blogs[$i][10]=$row2['blogger_firstname'];
+						$blogs[$i][7]=$row2['blogger_username'];
+						$blogs[$i][8]=$row2['blogger_firstname'];
 					}
 				}
 				$j=$j+1;
@@ -241,6 +241,10 @@ class Viewer{
 				$i=$i+1;
 			}
 			return $blogs;
+		}
+		else
+		{
+			return false;
 		}
 	}
 
