@@ -27,7 +27,7 @@ class Blogger
 	{
 	 	unset($_SESSION['username']);
 	 	session_destroy();
-	 	header('Location:index.html');
+	 	header('Location:index.php');
 	 	
 	 }
 	public function is_signup($firstname,$email,$password){
@@ -202,7 +202,7 @@ class Admin{
 	{
 	 	unset($_SESSION['admin']);
 	 	session_destroy();
-	 	header('Location:index.html');
+	 	header('Location:index.php');
 	 	
 	 }
 }
@@ -246,6 +246,35 @@ class Viewer{
 		{
 			return false;
 		}
+	}
+
+	public function get_blogger($username)
+	{
+		$query1="SELECT blogger_firstname from blogger_info where blogger_username='$username'";
+		$result1=$this->conn->query($query1);
+		if($result1)
+		{
+			$row1 = $result1->fetch_assoc();
+			$firstname = $row1["blogger_firstname"];
+			return $firstname;
+		}
+		else{
+			return false;
+		}
+	}
+
+	public function profile($username)
+	{
+		$profile = new Blogger($this->conn);
+		$blogs =$profile->get_blog($username);
+		if($blogs != false)
+		{
+			return $blogs;
+		}
+		else{
+			return false;
+		}
+
 	}
 
 }

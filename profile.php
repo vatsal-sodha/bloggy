@@ -1,9 +1,7 @@
 <?php
-session_start();
+
 include_once 'classes.php';
 include_once 'connection.php';
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +16,6 @@ include_once 'connection.php';
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="jumbotron" id="top">
-    <div class="container">
-      <h1 class="text-center">Bloggy<br/><small><small class="hidden-xs pull-right">Express your thoughts</small></small></h1>
-    </div>
-  </div><!-- /jumbotron -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -30,7 +23,7 @@ include_once 'connection.php';
       <a class="navbar-brand" href="#">Bloggy</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
@@ -39,28 +32,33 @@ include_once 'connection.php';
     </ul>
   </div>
 </nav>
-</body>
+
 <?php
-
+if(isset($_GET['username']))
+{
+$username = $_GET['username'];
 $viewer = new Viewer($conn);
+$profile = $viewer->get_blogger($username);
+if($profile != false)
+{
+	echo '<h1 class = "text-center"> Blogs by '.$profile.' </h1>';
+}
+$profile = $viewer->profile($username);
 
-$blogs = $viewer->get_all_blogs();
-if($blogs == false)
-  {
-    echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
-  }
-  else{
-    $i=0;
-    while($i < count($blogs)) {
+if($profile != false)
+{
+	$i=0;
+    while($i < count($profile)) {
     
     echo '<div class="container">
     <div class="page-header">
-    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>by,<a href ="profile.php?username='.$blogs[$i][7].'">'.$blogs[$i][8].'</a></small></h1>
+    <h1>'.$profile[$i][1].'<br/><small>'.$profile[$i][3].','.$profile[$i][4].'</small></h1>
     </div>
-    <h4>'.$blogs[$i][3].'</h4>
+    <h4>'.$profile[$i][2].'</h4>
     </div>';
     $i=$i+1;  
     }
-    
-  }
+}
+
+}
 ?>
