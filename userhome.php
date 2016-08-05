@@ -53,8 +53,12 @@ if($blogs == false)
     
     echo '<div class="container">
     <div class="page-header">
-    <h1>'.$blogs[$i][1].'<br/><small>'.$blogs[$i][3].','.$blogs[$i][4].'</small></h1>
-    </div>
+    <h1>'.$blogs[$i][1].'<br/><small>'.$blogs[$i][3].','.$blogs[$i][4].',<a href = "update.php?blog_id='.$blogs[$i][0].'">update</a></small></h1>';
+    if(isset($blogs[$i][5])){
+      echo '<h3><small>Updated on'.$blogs[$i][5].'</small></h3>';
+    }
+
+    echo '</div>
     <h4>'.$blogs[$i][2].'</h4>
     </div>';
     $i=$i+1;  

@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_GET['username']))
+{
+	header('Location:index.php');
+}
 include_once 'classes.php';
 include_once 'connection.php';
 ?>

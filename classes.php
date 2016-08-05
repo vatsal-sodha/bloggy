@@ -110,7 +110,7 @@ class Blogger
 		{
 			return "No blogger id found";
 		}
-		$query1 = "SELECT blogger_id,blog_title,blog_desc,blog_category,creation_date from blog_master where blogger_id='$id'";
+		$query1 = "SELECT blog_id,blog_title,blog_desc,blog_category,creation_date,updated_date from blog_master where blogger_id='$id'";
 		$result= $this->conn->query($query1);
 		if($result){
 			$i=0;
@@ -126,6 +126,32 @@ class Blogger
 			}
 			return $blogs;
 
+		}
+		else{
+			return false;
+		}
+
+	}
+	public function get_blog_update($blog_id)
+	{
+		$query1= "SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author from blog_master";
+		$result = $this->conn->query($query1);
+		if($result)
+		{
+			$row = $result->fetch_assoc();
+			return $row;
+		}
+		else{
+			return false;
+		}
+	}
+	public function update($blog_id,$title,$category,$desc)
+	{
+		$date=date("Y-m-d");
+		$query1 = "UPDATE blog_master SET blog_title='$title',blog_category='$category',blog_desc='$desc',updated_date = '$date' WHERE blog_id='$blog_id'";
+		if($this->conn->query($query1))
+		{
+			return true;
 		}
 		else{
 			return false;
