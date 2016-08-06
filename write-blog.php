@@ -35,17 +35,17 @@ session_start();
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required 
-      value="<?php echo htmlentities($_SESSION['title']);?>">
+      value="<?php echo htmlspecialchars($_SESSION['title'],ENT_QUOTES);?>">
     </div>
     <div class="form-group">
       <label for="category">Category</label>
       <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category like sports,music etc" required
-       value="<?php echo htmlentities($_SESSION['category']);?>">
+       value="<?php echo htmlspecialchars($_SESSION['category'],ENT_QUOTES);?>">
     </div>
     <div class="form-group">
   <label for="desc">Write Here:</label>
   <textarea class="form-control" rows="15" id="desc" name="desc" required placeholder="Start writing...."  
-  ><?php echo htmlentities($_SESSION['desc']);?></textarea>
+  ><?php echo htmlspecialchars($_SESSION['desc'],ENT_QUOTES);?></textarea>
 </div>
     
     <button type="submit" name="submit" class="btn btn-info">Publish</button>
@@ -55,9 +55,9 @@ session_start();
 
 if(isset($_POST['submit']))
 {
-	$title = $_POST['title'];
-	$category = $_POST['category'];
-	$desc = htmlspecialchars($_POST['desc']);
+	 $title = htmlspecialchars($_POST['title'],ENT_QUOTES);
+  $category = htmlspecialchars($_POST['category'],ENT_QUOTES);
+  $desc = htmlspecialchars($_POST['desc'],ENT_QUOTES);
 	$username=$_SESSION['username'];
 
 

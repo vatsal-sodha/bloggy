@@ -27,24 +27,26 @@ include_once 'connection.php';
 	$blog = $blogger->get_blog_update($blogger_id);
 	if($blog == true)
 	{
-    
+    $title = html_entity_decode($blog["blog_title"],ENT_QUOTES);
 		echo '<div class="container" style="width:50%">
   <form role="form" method="post">
     <div class="form-group">
       <label for="title">Title</label>
       <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required 
-      value="'.$blog["blog_title"].'">
+      value="'.$title.'">
     </div>';
+    $category = html_entity_decode($blog["blog_category"],ENT_QUOTES);
     echo '<div class="form-group">
       <label for="category">Category</label>
       <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category like sports,music etc" required
-       value="'.htmlentities($blog["blog_category"]).'">
+       value="'.$category.'">
     </div>';
 
+    $desc = html_entity_decode($blog["blog_desc"],ENT_QUOTES);
     echo '<div class="form-group">
   <label for="desc">Write Here:</label>
   <textarea class="form-control" rows="15" id="desc" name="desc" required placeholder="Start writing....">
-  '.htmlentities($blog["blog_desc"]).'</textarea>
+  '.$desc.'</textarea>
   </div>';
   echo '<button type="submit" name="submit" class="btn btn-info">Publish</button>
   </form>
@@ -52,9 +54,9 @@ include_once 'connection.php';
 	}
   if(isset($_POST['submit']))
   {
-    $title = $_POST['title'];
-  $category = $_POST['category'];
-  $desc = htmlspecialchars($_POST['desc']);
+    $title = htmlspecialchars($_POST['title'],ENT_QUOTES);
+  $category = htmlspecialchars($_POST['category'],ENT_QUOTES);
+  $desc = htmlspecialchars($_POST['desc'],ENT_QUOTES);
   $blogger_id=$_GET['blog_id'];
 
 
