@@ -25,10 +25,15 @@ include_once 'connection.php';
       <li class="active"><a href="index.php">Home</a></li>
       
     </ul>
-  <ul class="nav navbar-nav navbar-right">
+  <ul class="nav navbar-nav navbar-right" <?php if(!isset($_GET['username'])){?>>
       <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
+      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ul>
+      <?php }?>
+      <ul class="nav navbar-nav navbar-right" <?php if(isset($_GET['username'])){?>>
+      <li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</a></li>
+      <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li><?php } ?> 
+    
+
   </div>
 </nav>
 
@@ -47,7 +52,15 @@ if($blogs == false)
     while($i < count($blogs)) {
     echo '<div class="container">
     <div class="page-header">
-    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>More by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
+    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6];
+    if(!isset($_GET['username']))
+    {
+    echo '<br/>More by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
+    }
+    //if user try to view his fulll blog then update should be there
+    else{
+    	echo '<a href = "update.php?blog_id='.$blogs[$i][0].'">,update</a> ';
+    }
     if(!is_null($blogs[$i][7]))
     {
       echo '<h3><small>Updated on '.$blogs[$i][7].'</small></h3>';

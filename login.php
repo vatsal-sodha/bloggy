@@ -20,13 +20,20 @@ if(isset($_SESSION['username']))
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bloggy</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.php">Home</a></li></ul></div></nav>
+      
 <div class="container" style="width:50%">
   <h2>Login</h2>
   <form role="form" method="post">
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
@@ -43,24 +50,39 @@ if(isset($_POST['submit'])){
 
 
   echo "<script type=javascript> console.log('Connection established');</script>";
-  $email=$_POST['email'];
+  $username=$_POST['username'];
   $password=$_POST['password'];
     
   
   $blogger = new Blogger($conn);
-  
-  $login = $blogger->is_login($email,$password);
-  
-
+  if($username != "admin"){
+  $login = $blogger->is_login($username,$password);
   if($login === true)
   {
-    $_SESSION['username']=$email;
+    $_SESSION['username']=$username;
     header('Location:userhome.php');
     
   }
   if($login === false){
    echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
   }
+  }
+  if($username === "admin")
+  {
+    $admin = new Admin($conn);
+    $admin_login = $admin->is_login($username,$password);
+    if($admin_login === true)
+    {
+      $_SESSION['admin']=$username;
+      header('Location:admin-panel.php');
+    }
+    if($admin_login === false)
+    {
+      echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
+    }
+  }
+
+  
 }
 
 ?>

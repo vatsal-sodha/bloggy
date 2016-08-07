@@ -254,7 +254,7 @@ class Viewer{
 				$j=0;
 				// 6 for 6 fields  
 				while ($j < 8){ 
-					if($j == 3 && $word_limit != '' && $blog_id != '')
+					if($j == 3 && $word_limit != '' && $blog_id != '*')
 					{
 						$blogs[$i][$j]= $this->limit_words($row[$j],$word_limit); 
 					}

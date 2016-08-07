@@ -20,6 +20,13 @@ if(isset($_SESSION['username']))
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Bloggy</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.php">Home</a></li></ul></div></nav>
 <div class="container" style="width:50%">
   <h2>Sign Up</h2>
   <form role="form" method="post">
@@ -29,8 +36,8 @@ if(isset($_SESSION['username']))
     </div>
 
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
     </div>
     <div class="form-group">
       <label for="password">Password:</label>
@@ -51,7 +58,7 @@ if(isset($_POST['submit'])){
 
 
   echo "Button pressed";
-  $email=$_POST['email'];
+  $username=$_POST['username'];
   $password=$_POST['password'];
   $firstname=$_POST['firstname'];
 
@@ -59,12 +66,12 @@ if(isset($_POST['submit'])){
   
   $blogger = new Blogger($conn);
   
-  $signup = $blogger->is_signup($firstname,$email,$password);
+  $signup = $blogger->is_signup($firstname,$username,$password);
   
 
   if($signup === true)
   {
-    $_SESSION['username']=$email;
+    $_SESSION['username']=$username;
     echo $signup;
     header('Location:userhome.php');
     
