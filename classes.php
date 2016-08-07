@@ -118,7 +118,7 @@ class Blogger
 			while ($row = $result->fetch_array(MYSQLI_NUM)) {
 				$j=0;
 				// 5 for 5 fields id,title,desc,category,date, 
-				while ($j < 5){ 
+				while ($j < 6){ 
 				$blogs[$i][$j]=$row[$j];
 				$j=$j+1;
 				}
@@ -236,9 +236,14 @@ class Viewer{
 	function __construct($conn){
 		$this->conn=$conn;
 	}
-	public function get_all_blogs()
+	public function get_all_blogs($word_limit,$blog_id)//id for getting whole blog
 	{
-		$query1 ="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author,creation_date from blog_master";
+		if($blog_id === 'all'){
+		$query1 ="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author,creation_date,updated_date from blog_master";
+		}
+		else{
+			$query1 = "SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author,creation_date,updated_date from blog_master WHERE blog_id = $blog_id"; 
+		}
 		$result1= $this->conn->query($query1);
 
 		if($result1)
@@ -248,8 +253,14 @@ class Viewer{
 			while ($row = $result1->fetch_array(MYSQLI_NUM)) {
 				$j=0;
 				// 6 for 6 fields  
-				while ($j < 7){ 
-				$blogs[$i][$j]=$row[$j];
+				while ($j < 8){ 
+					if($j == 3 && $word_limit != '' && $blog_id != '')
+					{
+						$blogs[$i][$j]= $this->limit_words($row[$j],$word_limit); 
+					}
+					else{
+						$blogs[$i][$j]=$row[$j];
+					}
 				if($j == 1)//for blogger id 
 				{
 					$query2="SELECT blogger_firstname,blogger_username from blogger_info where blogger_id ='$row[1]'";
@@ -257,7 +268,7 @@ class Viewer{
 					if($result2)
 					{
 						$row2=$result2->fetch_assoc();
-						$blogs[$i][7]=$row2['blogger_username'];
+						$blogs[$i][9]=$row2['blogger_username'];
 						$blogs[$i][8]=$row2['blogger_firstname'];
 					}
 				}
@@ -301,6 +312,11 @@ class Viewer{
 			return false;
 		}
 
+	}
+	public function limit_words($string,$word_limit)
+	{
+		$words = explode(" ", $string);
+		return implode(" ", array_slice($words,0,$word_limit+1));
 	}
 
 }

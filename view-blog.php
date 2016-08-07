@@ -1,12 +1,6 @@
 <?php
-session_start();
 include_once 'classes.php';
 include_once 'connection.php';
-
-if(isset($_SESSION['username']))
-{
-  header('Location:userhome.php');
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +15,6 @@ if(isset($_SESSION['username']))
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <div class="jumbotron" id="top">
-    <div class="container">
-      <h1 class="text-center">Bloggy<br/><small><small class="hidden-xs pull-right">Express your thoughts</small></small></h1>
-    </div>
-  </div><!-- /jumbotron -->
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -33,7 +22,7 @@ if(isset($_SESSION['username']))
       <a class="navbar-brand" href="#">Bloggy</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="index.php">Home</a></li>
       
     </ul>
   <ul class="nav navbar-nav navbar-right">
@@ -42,13 +31,13 @@ if(isset($_SESSION['username']))
     </ul>
   </div>
 </nav>
-</body>
-<?php
 
-$viewer = new Viewer($conn);
-$word_limit = '10';
-$blog_id = "all";
-$blogs = $viewer->get_all_blogs($word_limit,$blog_id);
+<?php
+if(isset($_GET['blog_id']))
+{
+	$viewer = new Viewer($conn);
+	$blog_id = (int)$_GET['blog_id'];
+	$blogs = $viewer->get_all_blogs('',$blog_id);
 if($blogs == false)
   {
     echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
@@ -58,7 +47,7 @@ if($blogs == false)
     while($i < count($blogs)) {
     echo '<div class="container">
     <div class="page-header">
-    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
+    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>More by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
     if(!is_null($blogs[$i][7]))
     {
       echo '<h3><small>Updated on '.$blogs[$i][7].'</small></h3>';
@@ -66,10 +55,9 @@ if($blogs == false)
 
     echo '</div>
     <h4>'.$blogs[$i][3].'</h4>';
-
-    echo '<div class = "text-center" style="background-color:#fffeff;opacity:0.7;width:inherit;text-decoration:none;"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a></div></div>';
     $i=$i+1;  
     }
     
   }
+}
 ?>
