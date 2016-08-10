@@ -15,33 +15,45 @@ if(isset($_SESSION['username']))
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
-  <link href="dist/css/custom.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <!--Import Google Icon Font-->
+      <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 </head>
-<body>
-  <div class="jumbotron" id="top">
+<body style="font-family:'Lora',serif;">
+  <!-- <div class="jumbotron" id="top">
     <div class="container">
       <h1 class="text-center">Bloggy<br/><small><small class="hidden-xs pull-right">Express your thoughts</small></small></h1>
     </div>
-  </div><!-- /jumbotron -->
+  </div> --><!-- /jumbotron -->
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bloggy</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      
-    </ul>
-  <ul class="nav navbar-nav navbar-right">
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
+  <div class="navbar-fixed">
+<nav>
+    <div class="nav-wrapper white">
+      <!-- <a href="#" class="brand-logo">Bloggy</a> -->
+      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="signup.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
+      <li><a href="login.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
+      </ul>
+      </div>
+      </nav>
+      </div>
+    <div class="container-fluid blue-grey valign-wrapper" style="height:50vh;">
+  <div class="row">
+  <div class="col s12 center-align">
+  <h1 class="white-text main-title valign" >Bloggy</h1>
+  <h3 class="sub-title white-text valign">-Express your thoughts</h3>
   </div>
-</nav>
+  </div>
+</div>
 </body>
 <?php
 
@@ -56,18 +68,20 @@ if($blogs == false)
   else{
     $i=0;
     while($i < count($blogs)) {
-    echo '<div class="container">
-    <div class="page-header">
-    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
+    echo '<div class="row">
+    <div class="col s12 m6 offset-m3">
+    <div class="card-panel medium">
+    <div class="card-content text-center">
+    <span class="card-title"><h3>'.$blogs[$i][2].'</span><br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h3>';
     if(!is_null($blogs[$i][7]))
     {
-      echo '<h3><small>Updated on '.$blogs[$i][7].'</small></h3>';
+      echo '<h5><small>Updated on '.$blogs[$i][7].'</small></h5>';
     }
 
     echo '</div>
-    <h4>'.$blogs[$i][3].'</h4>';
+    <h4 class="flow-text">'.$blogs[$i][3].'......</h4>';
 
-    echo '<div class = "text-center" style="background-color:#fffeff;opacity:0.7;width:inherit;text-decoration:none;"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a></div></div>';
+    echo '<div class = "text-center card-action" style="background-color:#fffeff;opacity:0.7;width:inherit;text-decoration:none;"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a></div></div>';
     $i=$i+1;  
     }
     

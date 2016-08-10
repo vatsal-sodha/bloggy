@@ -12,35 +12,52 @@ if(isset($_SESSION['username']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Login</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bloggy</a>
+ <nav>
+    <div class="nav-wrapper blue-grey">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="index.php" class="" style="padding-left:2em;text-decoration:none;">Home</a></li>
+      </ul>
+      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="signup.php" class="text-center" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li></ul></div></nav>
-      
+  </nav>
 <div class="container" style="width:50%">
   <h2>Login</h2>
-  <form role="form" method="post">
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" name="password" placeholder="Enter password" required>
-    </div>
-    
-    <button type="submit" name="submit" class="btn btn-default">Submit</button>
+  <div class="row">
+    <form class="col s12" method="post">
+      <div class="row">
+        <div class="input-field col s9">
+          <input id="username" type="text" class="validate" name="username" autofocus>
+          <label for="username">Username</label>
+        </div>
+        </div>
+   <div class="row">
+        <div class="input-field col s9">
+          <input id="pwd" name="password" type="password" class="validate">
+          <label for="pwd">Password</label>
+        </div>
+      </div>
+    <button class="btn waves-effect waves-light" type="submit" name="submit">Submit<i class="material-icons right">send</i>
+    </button>
   </form>
 </div>
 
