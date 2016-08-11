@@ -36,7 +36,7 @@ if(isset($_SESSION['username']))
         <li><a href="index.php" class="" style="padding-left:2em;text-decoration:none;">Home</a></li>
       </ul>
       <ul id ="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="signup.php" class="text-center" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
+      <li><a href="signup.php" class="text-center btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       </ul>
     </div>
   </nav>

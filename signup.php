@@ -12,45 +12,65 @@ if(isset($_SESSION['username']))
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+   <title>Sign Up</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bloggy</a>
+<nav>
+    <div class="nav-wrapper blue-grey">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="index.php" class="" style="padding-left:2em;text-decoration:none;">Home</a></li>
+      </ul>
+      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="login.php" class="text-center btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li></ul></div></nav>
+  </nav>
 <div class="container" style="width:50%">
   <h2>Sign Up</h2>
-  <form role="form" method="post">
-  	<div class="form-group" >
-      <label for="name">First Name:</label>
-      <input type="text" class="form-control" id="name" name="firstname" placeholder="Enter First Name">
-    </div>
+  <div class="row">
+    <form class="col s12" method="post">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="firstname" type="text" class="validate" name="firstname" autofocus>
+          <label for="firstname">Firstname</label>
+        </div>
+        </div>
 
-    <div class="form-group">
-      <label for="username">Username:</label>
-      <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
-    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" class="validate" name="username">
+          <label for="username">Username</label>
+        </div>
+        </div>
+    
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" name="password">
+          <label for="password">Password</label>
+        </div>
+        </div>
      <div class="form-group has-feedback" id="con_pwdiv">
       <label for="password">Confirm Password:</label>
-      <div id="conf_pwd">
-      <input type="password" class="form-control" id="confirmpassword" onkeyup="validatepw()" placeholder="Re-enter password"><span id="con_pwspan" class="form-control-feedback glyphicon"></span>
-    </div>
+      <input type="password" class="form-control" id="confirmpassword" onkeyup="validatepw()"><span id="con_pwspan" class="form-control-feedback glyphicon"></span>
     </div>
     
-    <button type="submit" name="submit" onclick = "return validatepw();" class="btn btn-default">Submit</button>
+   <button class="btn waves-effect waves-light" type="submit" name="submit">Submit<i class="material-icons right">send</i>
+    </button>
   </form>
 </div>
 <?php
