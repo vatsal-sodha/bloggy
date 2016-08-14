@@ -61,7 +61,7 @@ if(isset($_SESSION['username']))
 $viewer = new Viewer($conn);
 $word_limit = '10';
 $blog_id = "all";
-$blogs = $viewer->get_all_blogs($word_limit,$blog_id);
+$blogs = $viewer->get_all_blogs('',$blog_id);
 if($blogs == false)
   {
     echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
@@ -70,19 +70,25 @@ if($blogs == false)
     $i=0;
     while($i < count($blogs)) {
     echo '<div class="row">
-    <div class="col s12 m4 offset-m1">
-    <div class="card-panel small">
-    <div class="card-content text-center">
-    <span class="card-title"><h3>'.$blogs[$i][2].'</span><br/><small>'.$blogs[$i][4].','.$blogs[$i][6].'<br/>by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h3>';
+    <div class="col s12 m4" style="padding-left:2em;">
+    <div class="card sticky-action medium">
+    <div class="card-image  waves-effect waves-block waves-light">
+              <img class = "activator" src="'.$viewer->get_blog_image($blogs[$i][0]).'">
+            </div>
+    <div class="card-content">
+    <span class="card-title">'.$blogs[$i][2].'<h6 class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6].'</span>';
     if(!is_null($blogs[$i][7]))
     {
-      echo '<h5><small>Updated on '.$blogs[$i][7].'</small></h5>';
+      echo 'Updated on '.$blogs[$i][7].'</h6>';
     }
 
-    echo '</div>
-    <h4 class="flow-text">'.$blogs[$i][3].'......</h4>';
+    echo '<h4 class="flow-text">'.$viewer->limit_words($blogs[$i][3],$word_limit).'......</h4></div>';
 
-    echo '<div class = "text-center card-action" style="background-color:#fffeff;opacity:0.7;width:inherit;text-decoration:none;"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a></div></div></div></div>';
+    echo '<div class = "text-center card-action"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a>
+      by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a>
+      </div>';
+      echo '<div class="card-reveal"><span class="card-title">'.$blogs[$i][2].'<i class="material-icons right">close</i><h6 class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6].'<br/></h6> </span><h4 class="flow-text">'.$blogs[$i][3].'</div>
+      </div></div>';
     $i=$i+1;  
     }
     

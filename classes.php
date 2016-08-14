@@ -347,7 +347,19 @@ class Viewer{
 		$words = explode(" ", $string);
 		return implode(" ", array_slice($words,0,$word_limit+1));
 	}
-
+	public function get_blog_image($blog_id)
+	{
+		$query1 = "SELECT blog_detail_image FROM blog_detail WHERE blog_id='$blog_id'";
+		$result1 = $this->conn->query($query1);
+		if($result1)
+		{
+			$row = $result1->fetch_assoc();
+			return $row["blog_detail_image"];
+		}
+		else{
+			return false;
+		}
+	}
 }
 
 ?>
