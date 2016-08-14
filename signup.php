@@ -32,9 +32,7 @@ if(isset($_SESSION['username']))
 <body>
 <nav>
     <div class="nav-wrapper blue-grey">
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="index.php" class="" style="padding-left:2em;text-decoration:none;">Home</a></li>
-      </ul>
+       <a href="index.php" class="brand-logo">Bloggy</a>
       <ul id ="nav-mobile" class="right hide-on-med-and-down">
       <li><a href="login.php" class="text-center btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
       </ul>

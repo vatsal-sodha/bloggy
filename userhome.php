@@ -27,17 +27,16 @@ $blogger = new Blogger($conn);
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
 </head>
 <body>
- <nav>
+<nav>
     <div class="nav-wrapper blue-grey">
-      <ul id="nav-mobile" class="left hide-on-med-and-down">
-        <li><a href="index.php" class="" style="padding-left:2em;text-decoration:none;">Home</a></li>
-      </ul>
+      <a href="#" class="brand-logo" style="text-decoration:none">Bloggy</a>
       <ul id ="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</a></li>
-      <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
-        </ul>    
-  </div>
-</nav>
+      <li><a href="write-blog.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Write</a></li>
+      <li><a href="userhome.php?logout" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Logout</a></li>
+      </ul>
+      </div>
+      </nav>
+      </div>
 <?php
 
 if(isset($_GET['logout']))
@@ -52,7 +51,7 @@ $viewer = new Viewer($conn);
 
 if($blogs == false)
   {
-    echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
+    echo "<div class = 'container' style='padding-top:1em;'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
   }
   else{
     $i=0;

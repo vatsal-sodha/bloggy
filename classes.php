@@ -83,7 +83,7 @@ class Blogger
 	}
 
 
-	public function publish($username,$title,$category,$desc)
+	public function publish($username,$title,$category,$desc,$path)
 	{
 		$id = $this->get_blogger_id($username);
 		if ($id == false)
@@ -93,7 +93,9 @@ class Blogger
 
 		$date=date("Y-m-d");
 		$query2= "INSERT INTO blog_master(blogger_id,blog_title,blog_desc,blog_category,blog_author,blog_is_active,creation_Date) VALUES($id,'$title','$desc','$category','$username',1,'$date')";
-		if($this->conn->query($query2))
+		$result= $this->conn->query($query2);
+		$image = $this->add_image($path);
+		if($result && $image)
 		{
 			return true;
 		}
@@ -101,7 +103,34 @@ class Blogger
 			return false;
 		}
 	}
-
+	public function get_last_blog_id()
+	{
+		$query1="SELECT blog_id FROM blog_master ORDER BY blog_id DESC LIMIT 1";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+			$row = $result->fetch_assoc();
+			$id = (int)$row["blog_id"];
+			return $id;
+		}
+		else{
+			return false;
+		}
+	}
+	public function add_image($path)
+	{
+		$blog_id = $this->get_last_blog_id();
+		if($blog_id != false){
+			$query1 = "INSERT INTO blog_detail(blog_id,blog_detail_image) VALUES('$blog_id','$path')";
+			if($this->conn->query($query1))
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+	}	
 
 	public function get_blog($username)
 	{
