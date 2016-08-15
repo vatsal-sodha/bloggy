@@ -18,33 +18,43 @@ include_once 'connection.php';
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <!--Import Google Icon Font-->
+   <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> 
+      <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+  </script>  
 </head>
-<body>
+<body style="font-family:'Lora',serif;">
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bloggy</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li>
-      
-    </ul>
-  <ul class="nav navbar-nav navbar-right" <?php if(!isset($_GET['username'])){?>>
-      <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li></ul>
+ <div class="navbar-fixed ">
+<nav>
+    <div class="nav-wrapper blue-grey">
+      <a href="index.php" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+       <ul class="right hide-on-med-and-down" <?php if(!isset($_GET['username'])){?>>
+      <li><a href="signup.php" class =  "btn waves-effect waves-light deep-orange lighten-2">Sign Up</a></li>
+      <li><a href="login.php" class =  "btn waves-effect waves-light deep-orange lighten-2">Login</a></li></ul>
       <?php }?>
-      <ul class="nav navbar-nav navbar-right" <?php if(isset($_GET['username'])){?>>
-      <li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</a></li>
-      <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li><?php } ?> 
-    
+      <ul class="right hide-on-med-and-down" <?php if(isset($_GET['username'])){?>>
+      <li><a href="write-blog.php" class =  "btn waves-effect waves-light deep-orange lighten-2">Write</a></li>
+      <li><a href="userhome.php?logout" class =  "btn waves-effect waves-light deep-orange lighten-2">Logout</a></li></ul><?php } ?> 
+       <ul class="side-nav" id="mobile-demo" <?php if(!isset($_GET['username'])){?>>
+       	<li><a href="signup.php" >Sign Up</a></li>
+      <li><a href="login.php" >Login</a></li>
+      <?php }?></ul>
+      <ul class="side-nav" id="mobile-demo" <?php if(isset($_GET['username'])){?>>
+       	<li><a href="write-blog.php" >Write</a></li>
+      <li><a href="userhome.php?logout" >Logout</a></li>
+      <?php }?></ul>
 
+    
+</div>
   </div>
 </nav>
-
 <?php
 if(isset($_GET['blog_id']))
 {
@@ -59,6 +69,7 @@ if($blogs == false)
     $i=0;
     while($i < count($blogs)) {
     echo '<div class="container">
+    <img src ="'.$viewer->get_blog_image($blogs[$i][0]).'" style="width:80%;height:40%;padding-top:2em;"/>
     <div class="page-header">
     <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6];
     if(!isset($_GET['username']))

@@ -25,15 +25,25 @@ $blogger = new Blogger($conn);
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
+      <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+      </script>
 </head>
-<body>
-<nav>
+<body style="font-family:'Lora',serif;">
+<div class="navbar-fixed ">
+  <nav>
     <div class="nav-wrapper blue-grey">
-      <a href="#" class="brand-logo" style="text-decoration:none">Bloggy</a>
-      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
       <li><a href="write-blog.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Write</a></li>
       <li><a href="userhome.php?logout" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Logout</a></li>
       </ul>
+       <ul class="side-nav" id="mobile-demo">
+         <li><a href="write-blog.php" style="text-decoration:none">Write</a></li>
+      <li><a href="userhome.php?logout"  style="text-decoration:none">Logout</a></li></ul>
       </div>
       </nav>
       </div>
@@ -57,19 +67,23 @@ if($blogs == false)
     $i=0;
     while($i < count($blogs)) {
     $word_limit = '10';
-    $desc = $viewer->limit_words($blogs[$i][2],$word_limit);
-    echo '<div class="container">
-    <div class="page-header">
-    <h1>'.$blogs[$i][1].'<br/><small>'.$blogs[$i][3].','.$blogs[$i][4].',<a href = "update.php?blog_id='.$blogs[$i][0].'">update</a></small></h1>';
+    echo '<div class="row">
+    <div class="col s12 m4" style="padding-left:2em;">
+    <div class="card sticky-action medium">
+    <div class="card-image  waves-effect waves-block waves-light">
+              <img class = "activator" src="'.$viewer->get_blog_image($blogs[$i][0]).'">
+            </div>
+    <div class="card-content">
+    <span class="card-title">'.$blogs[$i][1].'<h6 class="flow-text grey-text">'.$blogs[$i][3].','.$blogs[$i][4];
     if(!is_null($blogs[$i][5]))
     {
-      echo '<h3><small>Updated on '.$blogs[$i][5].'</small></h3>';
+      echo ',Updated on '.$blogs[$i][5].'</h6></span>';
     }
+     echo '<h4 class="flow-text">'.$viewer->limit_words($blogs[$i][2],$word_limit).'......</h4></div>';
+     echo '<div class = "text-center card-action">
+      <a href = "update.php?blog_id='.$blogs[$i][0].'">update</a><a href ="view-blog.php?blog_id='.$blogs[$i][0].'&username='.$username.'" >Read More</a></div>';
 
-    echo '</div>
-    <h4>'.$desc.'</h4>
-    </div>';
-    echo '<div class = "text-center" style="background-color:#fffeff;opacity:0.7;width:inherit;text-decoration:none;"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'&username='.$username.'" >Read More</a></div></div>';
+      echo '<div class="card-reveal"><span class="card-title">'.$blogs[$i][1].'<i class="material-icons right">close</i><h6 class="flow-text grey-text">'.$blogs[$i][3].','.$blogs[$i][4].'<br/></h6> </span><h4 class="flow-text">'.$blogs[$i][2].'</div></div></div>';
     $i=$i+1;  
     }
     

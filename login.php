@@ -27,30 +27,40 @@ if(isset($_SESSION['username']))
   <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+       <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+  </script>  
 </head>
-<body>
- <nav>
+<body style="font-family:'Lora',serif;">
+ <div class="navbar-fixed ">
+  <nav>
     <div class="nav-wrapper blue-grey">
-      <a href="index.php" class="brand-logo" style="text-decoration:none">Bloggy</a>
-      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
       <li><a href="signup.php" class="text-center btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       </ul>
+      <ul class="side-nav" id="mobile-demo">
+       <li><a href="signup.php" style="text-decoration:none">Sign Up</a></li></ul>
     </div>
   </nav>
+  </div>
 <div class="container" style="width:50%">
   <h2>Login</h2>
   <div class="row">
     <form class="col s12" method="post">
       <div class="row">
         <div class="input-field col s9">
-          <input id="username" type="text" class="validate" name="username" autofocus>
+          <input id="username" type="text" class="validate" name="username" autofocus required>
           <label for="username">Username</label>
         </div>
         </div>
    <div class="row">
         <div class="input-field col s9">
-          <input id="pwd" name="password" type="password" class="validate">
+          <input id="pwd" name="password" type="password" class="validate" required>
           <label for="pwd">Password</label>
         </div>
       </div>

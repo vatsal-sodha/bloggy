@@ -25,9 +25,15 @@ if(isset($_SESSION['username']))
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <!--Import Google Icon Font-->
       <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
       <script src="/materialize/css/materialize.min.css"></script>
+      <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+  </script> 
 </head>
 <body style="font-family:'Lora',serif;">
   <!-- <div class="jumbotron" id="top">
@@ -37,13 +43,18 @@ if(isset($_SESSION['username']))
   </div> --><!-- /jumbotron -->
 
   <div class="navbar-fixed ">
-<nav>
+  <nav>
     <div class="nav-wrapper blue-grey">
-      <a href="#" class="brand-logo" style="text-decoration:none">Bloggy</a>
-      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
       <li><a href="signup.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       <li><a href="login.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
       </ul>
+       <ul class="side-nav" id="mobile-demo">
+         <li><a href="signup.php" style="text-decoration:none">Sign Up</a></li>
+      <li><a href="login.php"  style="text-decoration:none">Login</a></li>
+       </ul>
       </div>
       </nav>
       </div>
@@ -76,10 +87,10 @@ if($blogs == false)
               <img class = "activator" src="'.$viewer->get_blog_image($blogs[$i][0]).'">
             </div>
     <div class="card-content">
-    <span class="card-title">'.$blogs[$i][2].'<h6 class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6].'</span>';
+    <span class="card-title">'.$blogs[$i][2].'<p class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6];
     if(!is_null($blogs[$i][7]))
     {
-      echo 'Updated on '.$blogs[$i][7].'</h6>';
+      echo ',Updated on '.$blogs[$i][7].'</p></span>';
     }
 
     echo '<h4 class="flow-text">'.$viewer->limit_words($blogs[$i][3],$word_limit).'......</h4></div>';

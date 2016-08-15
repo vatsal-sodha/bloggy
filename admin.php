@@ -27,7 +27,7 @@ include_once 'connection.php';
       <!--Import materialize.css-->
       <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 </head>
-<body>
+<body style="font-family:'Lora',serif;">
 
 <div class="container" style="width:50%">
   <h2>Welcome Admin</h2>

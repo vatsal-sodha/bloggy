@@ -21,61 +21,92 @@ session_start();
 ?>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Blog</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <link type="text/css" rel="stylesheet" href="/dist/css/bootstrap.min.css"  media="screen,projection"/>    
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+  <!--Import Google Icon Font-->
+      <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <script src="/materialize/css/materialize.min.css"></script>
 </head>
-<body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Bloggy</a>
+<script type="text/javascript">
+	$(document ).ready(function(){
+		 $(".button-collapse").sideNav();
+	})
+	function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#preview').attr('src', e.target.result)
+                    .width(150)
+                    .height(200);;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+<body style="font-family:'Lora',serif;">
+<div class="navbar-fixed ">
+  <nav>
+    <div class="nav-wrapper blue-grey">
+      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+       <li><a href="userhome.php" class =  "btn waves-effect waves-light deep-orange lighten-2">Home</a></li>
+      <li><a href="userhome.php?logout" class =  "btn waves-effect waves-light deep-orange lighten-2">Logout</a></li></ul>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+       <li><a href="userhome.php">Home</a></li>
+      <li><a href="userhome.php?logout">Logout</a></li></ul>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="userhome.php">Home</a></li></ul>
-      <ul class="nav navbar-nav navbar-right">
-      <li><a href="write-blog.php" class="glyphicon glyphicon-pencil">Write</a></li>
-      <li><a href="userhome.php?logout" class="glyphicon glyphicon-log-out">Logout</a></li> 
-        </ul>
-        </div></nav>
-<div class="container" style="width:50%">
-  <form role="form" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-      <label for="title">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" required 
-      value="<?php if(isset($_SESSION['desc']))echo htmlspecialchars($_SESSION['title'],ENT_QUOTES);?>">
+  </nav>
+  </div>
+  
+
+<div class="container" style="width:50%;padding-top:2em;">
+<div class="row">
+    <form class="col s12" method="post">
+      <div class="row">
+        <div class="input-field col s9">
+          <input id="title" type="text" class="validate" name="title" autofocus required  value="<?php if(isset($_SESSION['title']))echo htmlspecialchars($_SESSION['title'],ENT_QUOTES);?>">
+          <label for="title">Title</label>
+        </div>
+        </div>
+        <div class="row">
+        <div class="input-field col s9">
+          <input id="category" type="text" class="validate" name="category" value="<?php if(isset($_SESSION['desc']))echo htmlspecialchars($_SESSION['category'],ENT_QUOTES);?>" required>
+          <label for="category">Category</label>
+        </div>
+        </div>
+        <div class="row">
+        <img id = "preview" src="#" alt="Your image"/>
+       <input type="file" name="blog_image" onchange="readURL(this);">
+       </div>
+        <div class="row">
+        <div class="input-field col s9">
+          <textarea id="textarea1" class="materialize-textarea validate" id="desc" name="desc" required=""><?php if(isset($_SESSION['desc']))echo htmlspecialchars($_SESSION['desc'],ENT_QUOTES);?></textarea>
+          <label for="textarea1">Start Writing...</label>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="submit">Submit<i class="material-icons right">send</i>
+    </button>
+    </form>
     </div>
-    <div class="form-group">
-      <label for="category">Category</label>
-      <input type="text" class="form-control" id="category" name="category" placeholder="Enter Category like sports,music etc" required
-       value="<?php if(isset($_SESSION['desc']))echo htmlspecialchars($_SESSION['category'],ENT_QUOTES);?>">
-    </div>
-    <!-- <div class="file-field input-field">
-    <div class="btn">
-    <span>File</span>
-    <input type="file">
-    </div>
-    <div class="file-path-wraaper">
-    <input class="file-path validate" type="te">
-    </div>
-    </div> -->	
-    <div class="form-group">
-    <input type="file" name="blog_image">
-    </div>
-    <div class="form-group">
-  <label for="desc">Write Here:</label>
-  <textarea class="form-control" rows="15" id="desc" name="desc" required placeholder="Start writing...."  
-  ><?php if(isset($_SESSION['desc']))echo htmlspecialchars($_SESSION['desc'],ENT_QUOTES);?></textarea>
-</div>
-    
-    <button type="submit" name="submit" class="btn btn-info">Publish</button>
-  </form>
-</div>
+
 <?php
 
 if(isset($_POST['submit']))

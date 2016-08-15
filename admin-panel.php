@@ -26,16 +26,26 @@ include_once 'connection.php';
   <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+      <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+  </script>   
 </head>
 
-<body>
-<nav>
+<body style="font-family:'Lora',serif;">
+<div class="navbar-fixed ">
+  <nav>
     <div class="nav-wrapper blue-grey">
-      <a href="index.php" class="brand-logo" style="text-decoration:none">Bloggy</a>
-      <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
       <li><a href="admin-panel.php?logout" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Logout</a></li>
       </ul>
+       <ul class="side-nav" id="mobile-demo">
+         <li><a href="admin-panel.php?logout" style="text-decoration:none">Logout</a></li>
+       </ul>
       </div>
       </nav>
       </div>

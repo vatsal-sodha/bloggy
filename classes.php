@@ -174,10 +174,24 @@ class Blogger
 			return false;
 		}
 	}
-	public function update($blog_id,$title,$category,$desc)
+	public function update($blog_id,$title,$category,$desc,$path)
 	{
 		$date=date("Y-m-d");
 		$query1 = "UPDATE blog_master SET blog_title='$title',blog_category='$category',blog_desc='$desc',updated_date = '$date' WHERE blog_id='$blog_id'";
+		$update =$this->conn->query($query1);
+		$image = $this->update_image($path,$blog_id);
+		if($update && $image)
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
+	public function update_image($path,$blog_id)
+	{
+		$query1 = "UPDATE blog_detail SET blog_detail_image='$path' WHERE blog_id = '$blog_id'";
 		if($this->conn->query($query1))
 		{
 			return true;

@@ -27,15 +27,24 @@ if(isset($_SESSION['username']))
   <!--Import Google Icon Font-->
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>  
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> 
+      <script type="text/javascript">
+        $(document ).ready(function(){
+     $(".button-collapse").sideNav();
+  })
+  </script>  
 </head>
-<body>
+<body style="font-family:'Lora',serif;">
 <nav>
     <div class="nav-wrapper blue-grey">
-       <a href="index.php" class="brand-logo">Bloggy</a>
+       <a href="index.php" class="brand-logo" style="text-decoration:none">Bloggy</a>
       <ul id ="nav-mobile" class="right hide-on-med-and-down">
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <li><a href="login.php" class="text-center btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
       </ul>
+       <ul class="side-nav" id="mobile-demo">
+         <li><a href="login.php" style="text-decoration:none">Login</a></li>
+       </ul>
     </div>
   </nav>
 <div class="container" style="width:50%">
@@ -44,21 +53,21 @@ if(isset($_SESSION['username']))
     <form class="col s12" method="post">
       <div class="row">
         <div class="input-field col s12">
-          <input id="firstname" type="text" class="validate" name="firstname" autofocus>
+          <input id="firstname" type="text" class="validate" name="firstname" autofocus required>
           <label for="firstname">Firstname</label>
         </div>
         </div>
 
     <div class="row">
         <div class="input-field col s12">
-          <input id="username" type="text" class="validate" name="username">
+          <input id="username" type="text" class="validate" name="username" required>
           <label for="username">Username</label>
         </div>
         </div>
     
     <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate" name="password">
+          <input id="password" type="password" class="validate" name="password" required>
           <label for="password">Password</label>
         </div>
         </div>
@@ -75,7 +84,6 @@ if(isset($_SESSION['username']))
 if(isset($_POST['submit'])){
 
 
-  echo "Button pressed";
   $username=$_POST['username'];
   $password=$_POST['password'];
   $firstname=$_POST['firstname'];
