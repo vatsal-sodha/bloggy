@@ -50,7 +50,7 @@ if(isset($_SESSION['username']))
   </div>
 <div class="container" style="width:50%">
   <h2>Login</h2>
-  <div class="row">
+  <div class="row col s12">
     <form class="col s12" method="post">
       <div class="row">
         <div class="input-field col s9">

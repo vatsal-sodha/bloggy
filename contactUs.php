@@ -50,60 +50,21 @@ if(isset($_SESSION['username']))
       <ul class="right hide-on-med-and-down">
       <li><a href="signup.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       <li><a href="login.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
-      <li><a href="contactUs.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Contact Us</a></li>
       </ul>
        <ul class="side-nav" id="mobile-demo">
          <li><a href="signup.php" style="text-decoration:none">Sign Up</a></li>
       <li><a href="login.php"  style="text-decoration:none">Login</a></li>
-       <li><a href="conactUs.php"  style="text-decoration:none">Contact Us</a></li>
-       </ul>
       </div>
       </nav>
       </div>
-    <!-- <div class="container-fluid blue-grey valign-wrapper" style="height:50vh;">
-  <div class="row">
-  <div class="col s12 center-align">
-  <h1 class="white-text main-title valign" >Bloggy</h1>
-  <h3 class="sub-title white-text valign">-Express your thoughts</h3>
-  </div>
-  </div>
-</div> -->
-</body>
-<?php
-
-$viewer = new Viewer($conn);
-$word_limit = '10';
-$blog_id = "all";
-$blogs = $viewer->get_all_blogs('',$blog_id);
-if($blogs == false)
-  {
-    echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
-  }
-  else{
-    $i=0;
-    while($i < count($blogs)) {
-    echo '<div class="row">
-    <div class="col s12 m4" style="padding-left:2em;">
-    <div class="card sticky-action medium">
-    <div class="card-image  waves-effect waves-block waves-light">
-              <img class = "activator" src="'.$viewer->get_blog_image($blogs[$i][0]).'">
-            </div>
-    <div class="card-content">
-    <span class="card-title">'.$blogs[$i][2].'<p class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6];
-    if(!is_null($blogs[$i][7]))
-    {
-      echo ',Updated on '.$blogs[$i][7].'</p></span>';
-    }
-
-    echo '<h4 class="flow-text">'.$viewer->limit_words($blogs[$i][3],$word_limit).'......</h4></div>';
-
-    echo '<div class = "text-center card-action"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a>
-      by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a>
-      </div>';
-      echo '<div class="card-reveal"><span class="card-title">'.$blogs[$i][2].'<i class="material-icons right">close</i><h6 class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6].'<br/></h6> </span><h4 class="flow-text">'.$blogs[$i][3].'</div>
-      </div></div>';
-    $i=$i+1;  
-    }
+    <h3 class="text-center">Made by: Vatsal Sodha</h3>
+    <img src="images/vatsal.jpg" class="img-circle center-block" alt="Cinque Terre" width="304" height="236" >
+    <div class="row" style="padding-left:38%;padding-top:2%;">
+    <a href="https://www.facebook.com/vatsal.sodha"><img src="images/fb.png" class="img-circle" alt="facebook" width="50" height="40" hspace="20"></a>
+    <a href="https://www.twitter.com/@SodhaVatsal"><img src="images/twitter.png" class="img-circle" alt="Cinque Terre" width="50" height="40" hspace="20"></a>
+    <a href="https://in.linkedin.com/in/vatsalsodha"><img src="images/linkedin.png" class="img-circle" alt="Cinque Terre" width="50" height="40" hspace="20"></a>
+    <a href="https://github.com/vatsal-sodha"><img src="images/github.png" class="img-circle" alt="Cinque Terre" width="50" height="40" hspace="20">
     
-  }
-?>
+
+    </div>
+</body>

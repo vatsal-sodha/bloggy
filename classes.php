@@ -27,7 +27,7 @@ class Blogger
 	{
 	 	unset($_SESSION['username']);
 	 	session_destroy();
-	 	header('Location:index.php');
+	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = 'index.php';</script>";
 	 	
 	 }
 	public function is_signup($firstname,$email,$password){

@@ -42,10 +42,6 @@ include_once 'connection.php';
       <ul class="right hide-on-med-and-down" <?php if(isset($_GET['username'])){?>>
       <li><a href="write-blog.php" class =  "btn waves-effect waves-light deep-orange lighten-2">Write</a></li>
       <li><a href="userhome.php?logout" class =  "btn waves-effect waves-light deep-orange lighten-2">Logout</a></li></ul><?php } ?> 
-       <ul class="side-nav" id="mobile-demo" <?php if(!isset($_GET['username'])){?>>
-       	<li><a href="signup.php" >Sign Up</a></li>
-      <li><a href="login.php" >Login</a></li>
-      <?php }?></ul>
       <ul class="side-nav" id="mobile-demo" <?php if(isset($_GET['username'])){?>>
        	<li><a href="write-blog.php" >Write</a></li>
       <li><a href="userhome.php?logout" >Logout</a></li>

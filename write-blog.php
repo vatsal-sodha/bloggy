@@ -79,7 +79,7 @@ session_start();
 
 <div class="container" style="width:50%;padding-top:2em;">
 <div class="row">
-    <form class="col s12" method="post">
+    <form class="col s12" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="input-field col s9">
           <input id="title" type="text" class="validate" name="title" autofocus required  value="<?php if(isset($_SESSION['title']))echo htmlspecialchars($_SESSION['title'],ENT_QUOTES);?>">
@@ -108,14 +108,12 @@ session_start();
     </div>
 
 <?php
-
 if(isset($_POST['submit']))
 {
 	 $title = htmlspecialchars($_POST['title'],ENT_QUOTES);
   	$category = htmlspecialchars($_POST['category'],ENT_QUOTES);
   	$desc = htmlspecialchars($_POST['desc'],ENT_QUOTES);
 	$username=$_SESSION['username'];
-
 		$target_dir = "images/";
 		$target_file = $target_dir . basename($_FILES["blog_image"]["name"]);
 		$uploadOk = 1;
@@ -150,8 +148,6 @@ if(isset($_POST['submit']))
 	        echo "Sorry, there was an error uploading your file.";
 	    }
 	}
-
-
 	$publish = $blogger->publish($username,$title,$category,$desc,$target_file);
 	if($publish == true)
 	{
@@ -169,6 +165,5 @@ if(isset($_POST['submit']))
 	if($publish == "No blogger id found"){
 		echo "No id found";
 	}
-
 }
 ?>
