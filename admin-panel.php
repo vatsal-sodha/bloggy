@@ -1,8 +1,9 @@
 <?php
-// if (!isset($_SESSION['admin']))
-// {
-// 	header('Location:admin.php');
-// }
+session_start();
+if (!isset($_SESSION['admin']))
+{
+	header('Location:login.php');
+}
 
 include_once 'classes.php';
 include_once 'connection.php';

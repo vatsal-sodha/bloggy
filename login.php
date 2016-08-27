@@ -92,7 +92,7 @@ if(isset($_POST['submit'])){
    echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
   }
   }
-  if($username === "admin")
+ else
   {
     $admin = new Admin($conn);
     $admin_login = $admin->is_login($username,$password);

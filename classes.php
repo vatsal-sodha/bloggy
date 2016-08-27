@@ -163,7 +163,7 @@ class Blogger
 	}
 	public function get_blog_update($blog_id)
 	{
-		$query1= "SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author from blog_master";
+		$query1= "SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author from blog_master where blog_id='$blog_id'";
 		$result = $this->conn->query($query1);
 		if($result)
 		{

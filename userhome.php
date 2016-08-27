@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['username']))
+{
+  header('Location:index.php');
+}
 include_once 'classes.php';
 include_once 'connection.php';
 $username=$_SESSION['username'];
@@ -35,7 +39,7 @@ $blogger = new Blogger($conn);
 <div class="navbar-fixed ">
   <nav>
     <div class="nav-wrapper blue-grey">
-      <a href="#!" class="brand-logo" style="text-decoration:none">Bloggy</a>
+      <a href="index.php" class="brand-logo" style="text-decoration:none">Bloggy</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
       <li><a href="write-blog.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Write</a></li>

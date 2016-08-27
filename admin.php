@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(isset($_SESSION['admin']))
-{
-  header('Location:userhome.php');
-}
+// if(isset($_SESSION['admin']))
+// {
+//   header('Location:userhome.php');
+// }
 include_once 'classes.php';
 include_once 'connection.php';
 ?>
@@ -59,13 +59,13 @@ if(isset($_POST['submit'])){
   $login = $admin->is_login($email,$password);
   
 
-  if($login === true)
+  if($login == true)
   {
-    $_SESSION['admin']=$username;
+    $_SESSION['admin']=$email;
     header('Location:admin-panel.php');
     
   }
-  if($login === false){
+  if($login == false){
    echo '<div class="alert alert-danger pagination-centered" style="width:50%; margin-left:auto; margin-right:auto;"><center>Invalid Constraints</center></div>';
   }
 }

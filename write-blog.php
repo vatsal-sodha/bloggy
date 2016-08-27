@@ -151,15 +151,9 @@ if(isset($_POST['submit']))
 	$publish = $blogger->publish($username,$title,$category,$desc,$target_file);
 	if($publish == true)
 	{
-		unset($_SESSION['title']);
-		unset($_SESSION['category']);
-		unset($_SESSION['desc']);
 		echo "<script type='text/javascript'>alert('Published Succesfully');window.location.href = 'userhome.php';</script>";
 	}
 	if($publish == false){
-		$_SESSION['title'] = $title;
-		$_SESSION['category'] = $category;
-		$_SESSION['desc'] = $desc;
 		echo "<script type='text/javascript'>alert('There is something wrong, your blog is saved as draft');window.location.href = 'userhome.php';</script>";
 	}
 	if($publish == "No blogger id found"){
