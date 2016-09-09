@@ -1,2 +1,0 @@
-# bloggy
-#Software Tools Project
