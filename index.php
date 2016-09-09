@@ -14,21 +14,17 @@ if(isset($_SESSION['username']))
   <title>Blog</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-
+    
   <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <!--Import Google Icon Font-->
+  <link href = "dist/css/bootstrap.min.css"/>
       <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-      <script src="/materialize/css/materialize.min.css"></script>
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+       <script type="text/javascript" src="materialize/js/jquery-3.1.0.min.js"></script>
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
       <script type="text/javascript">
         $(document ).ready(function(){
      $(".button-collapse").sideNav();
@@ -99,6 +95,7 @@ if($blogs == false)
 
     echo '<div class = "text-center card-action"><a href ="view-blog.php?blog_id='.$blogs[$i][0].'" >Read More</a>
       by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a>
+      <a href = "view-blog.php?category='.$blogs[$i][4].'">'.$blogs[$i][4].'</a>
       </div>';
       echo '<div class="card-reveal"><span class="card-title">'.$blogs[$i][2].'<i class="material-icons right">close</i><h6 class="flow-text grey-text">'.$blogs[$i][4].','.$blogs[$i][6].'<br/></h6> </span><h4 class="flow-text">'.$blogs[$i][3].'</div>
       </div></div>';

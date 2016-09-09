@@ -374,6 +374,44 @@ class Viewer{
 			return false;
 		}
 	}
+	public function get_blogs_by_category($category)
+	{
+		$query1 = "SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category,blog_author,creation_date,updated_date from blog_master WHERE blog_category LIKE '%$category%'";
+		$result1= $this->conn->query($query1);
+		if($result1)
+		{
+			$i=0;
+			$blogs = array();
+			while ($row = $result1->fetch_array(MYSQLI_NUM)) {
+				$j=0;
+				// 6 for 6 fields  
+				while ($j < 8){ 
+					
+						$blogs[$i][$j]=$row[$j];
+					
+				if($j == 1)//for blogger id 
+				{
+					$query2="SELECT blogger_firstname,blogger_username from blogger_info where blogger_id ='$row[1]'";
+					$result2 = $this->conn->query($query2);
+					if($result2)
+					{
+						$row2=$result2->fetch_assoc();
+						$blogs[$i][9]=$row2['blogger_username'];
+						$blogs[$i][8]=$row2['blogger_firstname'];
+					}
+				}
+				$j=$j+1;
+				}
+
+				$i=$i+1;
+			}
+			return $blogs;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 ?>

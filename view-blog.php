@@ -6,23 +6,23 @@ include_once 'connection.php';
 <html lang="en">
 <head>
   <title>Login</title>
-  <meta charset="utf-8">
+   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-
+    
   <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <!--Import Google Icon Font-->
+  <link href = "dist/css/bootstrap.min.css" rel="stylesheet" />
+      <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+       <script type="text/javascript" src="materialize/js/jquery-3.1.0.min.js"></script>
+      <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
    <link href='https://fonts.googleapis.com/css?family=Lora' rel='stylesheet' type='text/css'>
       <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/> 
-      <script type="text/javascript">
+          <script type="text/javascript">
         $(document ).ready(function(){
      $(".button-collapse").sideNav();
   })
@@ -87,5 +87,42 @@ if($blogs == false)
     }
     
   }
+}
+if(isset($_GET["category"]))
+{
+  $viewer = new Viewer($conn);
+  $category= $_GET["category"];
+  $blogs = $viewer->get_blogs_by_category($category);
+  if($blogs == false)
+  {
+    echo "<div class = 'container'><div class='alert alert-info text-center'>No blogs published yet!</div></div>";
+  }
+  else{
+    $i=0;
+    while($i < count($blogs)) {
+    echo '<div class="container">
+    <img src ="'.$viewer->get_blog_image($blogs[$i][0]).'" style="width:80%;height:40%;padding-top:2em;"/>
+    <div class="page-header">
+    <h1>'.$blogs[$i][2].'<br/><small>'.$blogs[$i][4].','.$blogs[$i][6];
+    if(!isset($_GET['username']))
+    {
+    echo '<br/>More by,<a href ="profile.php?username='.$blogs[$i][9].'">'.$blogs[$i][8].'</a></small></h1>';
+    }
+    //if user try to view his fulll blog then update should be there
+    else{
+      echo '<a href = "update.php?blog_id='.$blogs[$i][0].'">,update</a> ';
+    }
+    if(!is_null($blogs[$i][7]))
+    {
+      echo '<h3><small>Updated on '.$blogs[$i][7].'</small></h3>';
+    }
+
+    echo '</div>
+    <h4>'.$blogs[$i][3].'</h4></div><br/><br/><br/>';
+    $i=$i+1;  
+    }
+    
+  }
+
 }
 ?>
