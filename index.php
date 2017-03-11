@@ -47,7 +47,14 @@ if(isset($_SESSION['username']))
       <li><a href="signup.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       <li><a href="login.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
       <li><a href="contactUs.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Contact Us</a></li>
-      </ul>
+          </ul>
+       <form style="margin-left: 200px;">
+        <div class="input-field" style="max-width: 400pt;">
+          <input id="search" type="search" required>
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+        </div>
+      </form>
        <ul class="side-nav" id="mobile-demo">
          <li><a href="signup.php" style="text-decoration:none">Sign Up</a></li>
       <li><a href="login.php"  style="text-decoration:none">Login</a></li>
