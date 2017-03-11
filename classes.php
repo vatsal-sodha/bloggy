@@ -412,6 +412,20 @@ class Viewer{
 			return false;
 		}
 	}
+	public function searchBlogs($string)
+	{
+
+		$query1="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category from blog_master WHERE ((blog_category LIKE '%$string%') OR (blog_title LIKE '%$string%') OR (blog_desc LIKE '%$string%'))";
+		$result1=$this->conn->query($query1);
+		$output = array();
+		if($result1){
+			$output=$result1->fetch_all(MYSQLI_ASSOC);
+			$row1=$result1->fetch_assoc();
+			echo $row1['blog_title'];
+			$output=json_encode($output);
+			return $output;
+		}
+	}
 }
 
 ?>

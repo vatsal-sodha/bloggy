@@ -29,6 +29,39 @@ if(isset($_SESSION['username']))
         $(document ).ready(function(){
      $(".button-collapse").sideNav();
   })
+        function getBlogs(str,flag){
+          if(str==""){
+            if(flag == 0) //laptop size
+            {
+            document.getElementById("searchResults").innerHTML="";
+          }
+          else{ //for mobile and laptop
+             document.getElementById("searchResults2").innerHTML="";
+          }
+              return;
+          }
+          var searchedResults,x,txt="";
+          var xhttp=new XMLHttpRequest();
+           xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        searchedResults=JSON.parse(this.responseText);
+        for(x in searchedResults)
+        {
+          txt += '<a href="view-blog.php?blog_id='+searchedResults[x].blog_id+'">'+searchedResults[x].blog_title+'</a> &nbsp &nbsp &nbsp' + 
+          '<a href="view-blog.php?category='+searchedResults[x].blog_category+'">'+searchedResults[x].blog_category+'</a>' + "<br>";
+        }
+    if(flag == 0) //laptop size
+            {
+            document.getElementById("searchResults").innerHTML=txt;
+          }
+          else{ //for mobile and laptop
+             document.getElementById("searchResults2").innerHTML=txt;
+          }
+    }
+  };
+  xhttp.open("GET", "searchBlogs.php?q=" + str, true);
+xhttp.send();
+        }
   </script> 
 </head>
 <body style="font-family:'Lora',serif;">
@@ -47,18 +80,26 @@ if(isset($_SESSION['username']))
       <li><a href="signup.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Sign Up</a></li>
       <li><a href="login.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Login</a></li>
       <li><a href="contactUs.php" class="btn waves-effect waves-light deep-orange lighten-2" style="padding-right:2em;text-decoration:none">Contact Us</a></li>
+
           </ul>
-       <form style="margin-left: 200px;">
+       <form class=" hide-on-med-and-down" style="margin-left: 200px;">
         <div class="input-field" style="max-width: 400pt;">
-          <input id="search" type="search" required>
+          <input id="search" type="search" required onkeyup="getBlogs(this.value,0);">
           <label class="label-icon" for="search"><i class="material-icons">search</i></label>
           <i class="material-icons">close</i>
+          <div id="searchResults" style="background-color:#666666; color:red"></div>
         </div>
       </form>
        <ul class="side-nav" id="mobile-demo">
          <li><a href="signup.php" style="text-decoration:none">Sign Up</a></li>
       <li><a href="login.php"  style="text-decoration:none">Login</a></li>
        <li><a href="conactUs.php"  style="text-decoration:none">Contact Us</a></li>
+       <li class="search"> <div class="search-wrapper card input-field">
+          <input type="search" required onkeyup="getBlogs(this.value,1);">
+          <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+          <i class="material-icons">close</i>
+          <div id="searchResults2" style="background-color:#666666; color:red"></div>
+        </div></li>
        </ul>
       </div>
       </nav>
