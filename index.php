@@ -45,11 +45,19 @@ if(isset($_SESSION['username']))
            xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
         searchedResults=JSON.parse(this.responseText);
+
         for(x in searchedResults)
         {
+          if(searchedResults[x].blog_id != undefined){
           txt += '<a href="view-blog.php?blog_id='+searchedResults[x].blog_id+'">'+searchedResults[x].blog_title+'</a> &nbsp &nbsp &nbsp' + 
           '<a href="view-blog.php?category='+searchedResults[x].blog_category+'">'+searchedResults[x].blog_category+'</a>' + "<br>";
+          }
+          else
+          {
+            txt += '<a href="profile.php?username='+searchedResults[x].blogger_username+'">User: '+searchedResults[x].blogger_firstname+'</a> &nbsp &nbsp &nbsp' +  "<br>"; 
+          }
         }
+        
     if(flag == 0) //laptop size
             {
             document.getElementById("searchResults").innerHTML=txt;

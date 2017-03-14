@@ -415,13 +415,17 @@ class Viewer{
 	public function searchBlogs($string)
 	{
 
-		$query1="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category from blog_master WHERE ((blog_category LIKE '%$string%') OR (blog_title LIKE '%$string%') OR (blog_desc LIKE '%$string%'))";
+		$query1="SELECT blog_id,blogger_id,blog_title,blog_desc,blog_category from blog_master WHERE ((blog_category LIKE '%$string%') OR (blog_title LIKE '%$string%')) ORDER BY creation_date DESC";
 		$result1=$this->conn->query($query1);
+		$query2="SELECT blogger_firstname,blogger_id,blogger_username from blogger_info WHERE ((blogger_firstname LIKE '%$string%') OR (blogger_username LIKE '%$string%'))";
+		$result2=$this->conn->query($query2);
 		$output = array();
+		$output1=array();
+		$output2 = array();
 		if($result1){
-			$output=$result1->fetch_all(MYSQLI_ASSOC);
-			$row1=$result1->fetch_assoc();
-			echo $row1['blog_title'];
+			$output1=$result1->fetch_all(MYSQLI_ASSOC);
+			$output2=$result2->fetch_all(MYSQLI_ASSOC);
+			$output=array_merge($output1,$output2);
 			$output=json_encode($output);
 			return $output;
 		}
