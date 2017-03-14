@@ -274,6 +274,18 @@ class Admin{
 	 	header('Location:index.php');
 	 	
 	 }
+	 public function add_document($document_name){
+	 	$date=date("Y-m-d");
+	 	$query1="INSERT INTO document(document_name,creation_date) VALUES('$document_name','$date')";
+	 	if($this->conn->query($query1))
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+
+	 }
 }
 class Viewer{
 	function __construct($conn){
@@ -419,13 +431,18 @@ class Viewer{
 		$result1=$this->conn->query($query1);
 		$query2="SELECT blogger_firstname,blogger_id,blogger_username from blogger_info WHERE ((blogger_firstname LIKE '%$string%') OR (blogger_username LIKE '%$string%'))";
 		$result2=$this->conn->query($query2);
+		$query3="SELECT document_name from document WHERE ((document_name LIKE '%$string%')) ORDER BY creation_date DESC";
+		$result3=$this->conn->query($query3);
 		$output = array();
 		$output1=array();
 		$output2 = array();
+		$output3=array();
 		if($result1){
 			$output1=$result1->fetch_all(MYSQLI_ASSOC);
 			$output2=$result2->fetch_all(MYSQLI_ASSOC);
-			$output=array_merge($output1,$output2);
+			$output3=$result3->fetch_all(MYSQLI_ASSOC);
+			$output=array_merge($output1,$output2,$output3);
+
 			$output=json_encode($output);
 			return $output;
 		}
