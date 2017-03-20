@@ -247,7 +247,59 @@ class Admin{
 		}
 
 	}
+	public function get_documents(){
+		$query1="SELECT document_id,document_name from document ORDER BY creation_date DESC";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+				$documents=array();
+				$i=0;
+				while ($row = $result->fetch_array(MYSQLI_NUM)) {
+					$j=0;
+					while($j < 2){
+						$documents[$i][$j] = $row[$j];
+						$j=$j+1;
+				}
+						$i=$i+1;
 
+				}
+				return $documents;
+
+		}
+		else{
+			return false;
+		}
+
+	}
+	public function delete_document($fileId)
+	{
+		
+		$query1="SELECT document_name from document WHERE document_id='$fileId'";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+			$row=$result->fetch_assoc();
+
+			$fileName="documents/".$row["document_name"];
+		}
+		$isDeleted=unlink($fileName);
+		if($isDeleted)
+		{
+			$query2="DELETE from document WHERE document_id='$fileId'";
+			$result2=$this->conn->query($query2);
+			if($result2)
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+
+	}	
 
 	public function permission($username,$active){
 		$query1 = "SELECT blogger_is_active from blogger_info where blogger_username='$username'";

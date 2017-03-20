@@ -103,13 +103,45 @@ $admin = new Admin($conn);
  		 echo '<div class="alert alert-danger" style="width:50%; margin-left:auto; margin-right:auto;"><center>Soory something went wrong</center></div>';
  	}
  }
+if(isset($_GET['delete']))
+{
+  $file_name=$_GET['delete'];
+  $isDeleted=$admin->delete_document($_GET['delete']);
+  if($isDeleted)
+  {
+    header('Location:admin-panel.php'); 
+  }
 
+}
 if(isset($_GET['logout']))
 {
   
   $logout =$admin->admin_logout();
   
 }
+
+// get documnets
+$documents=$admin->get_documents();
+if($documents == false)
+{
+
+    echo "<div class='alert alert-info'>No blogger registered</div>";
+}
+else{
+
+    echo ' <div class="container"><table class="table table-striped"><thead><tr>
+        <th>Document_name</th>
+        <th>Status</th>
+      </tr></thead><tbody>';
+      $i=0;
+      while($i < count($documents))
+      {
+         echo '<tr>
+          <td><a href="documents/'.$documents[$i][1].'">'.$documents[$i][1].'</a></td>
+          <td><a href="admin-panel.php?delete='.$documents[$i][0].'">Delete</a></td>';
+          $i=$i+1;
+      }
+} 
 ?>
 <form action="" method="post" enctype="multipart/form-data" style="margin-left: 200px;">
     Select image to upload:
